@@ -118,12 +118,12 @@
 			随机图像
 				使用random和randint函数实现
 ### 拼接图像
-			水平拼接数组
+#### 水平拼接数组
 				array=numpy.hstack(tup)
 					tup:要拼接的数组元组
 					array:将参数元组中的数组水平拼接后生成的新数组
 					hstack()方法可以拼接多个数组
-			垂直拼接数组
+#### 垂直拼接数组
 				array=np.vstack(tup)
 					tup:要拼接的数组
 					array:将参数元组中的数组垂直拼接后生成的新数组
@@ -139,7 +139,7 @@
 		BGR--->HSV（H：色调；S：饱和度；V：亮度）
 			同上
 ### 通道
-		拆分通道
+#### 拆分通道
 			b,g,r=cv2.split（bgr_image）
 				b：B通道图像
 				g：G通道图像
@@ -150,7 +150,7 @@
 				s：S通道图像
 				v：V通道图像
 				hsv_image：一幅HSV图像
-		合并通道
+#### 合并通道
 			bgr=cv2.merge([b,g,r])
 				bgr：按B-->G-->R的顺序合并通道后得到的图像
 				b：B通道图像

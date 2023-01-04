@@ -224,7 +224,7 @@
 			flipCode：翻转类型（0：沿X轴翻转；正数：沿Y轴翻转；负数：同时沿X轴、Y轴翻转）
 			dst：翻转之后的图像
 ### 仿射变换（affineTransformation）
-		平移（translation）
+#### 平移（translation）
 			dst=cv2.warpAffine(src,M,dsize,flags,borderMode,borderValue)
 				src：原始图像
 				M：一个2行3列的矩阵，根据此矩阵的值变换原图中的像素位置
@@ -233,18 +233,18 @@
 				borderMode：可选参数，边界类型，建议使用默认值
 				borderValue：可选参数，边界值，默认为0，建议使用默认值
 				dst：经过反射变换后输出图像
-		旋转（rotation）
+#### 旋转（rotation）
 			M=cv2.getRotationMatrix2D(center,angle,scale)
 				center：旋转的中心点坐标
 				angle：旋转的角度（不是弧度）。正数表示逆时针旋转，负数表示顺时针旋转
 				scale：缩放比例，浮点类型。如果取值1，表示图像保存原来的比例。
 				M：getRotationMatrix2D（）方法计算出仿射矩阵
-		倾斜（tilt）
+#### 倾斜（tilt）
 			M=cv2.getAffineTransform(src,dst)
 				src：原图3个点坐标，格式为3行2列的32位浮点数列表，例如：[[0,1],[1,0],[1,1]]
 				dst：倾斜图像的3个点坐标，格式与src一样
 				M：getAffineTransform（）方法计算出的仿射矩阵
-		透视（perspective）
+#### 透视（perspective）
 			dst=cv2.warpPerspective(src,M,dsize,flags,borderMode,borderValue)
 				src：原始图像
 				M：一个3行3列的矩阵，根据次矩阵的值变换原图中的像素位置
@@ -274,18 +274,18 @@
 		dst：经过阈值处理后的图像
 
 ### “非黑即白”的图像（blcakORwhite）
-	二值化处理（twoNumber）
+#### 二值化处理（twoNumber）
 		if  像素值<=阈值：像素值=0
 		if  像素值>阈值：像素值=最大值
-	反二值化处理（notTwoNumber）
+#### 反二值化处理（notTwoNumber）
 		if  像素值 <= 阈值：像素值 = 最大值
 		if  像素值 > 阈值：像素值 = 0
 
 ### 零处理（Zero）
-	低于阈值零处理（belowZero）
+#### 低于阈值零处理（belowZero）
 		if  像素值 <= 阈值：像素值 = 0
 		if  像素值 > 阈值：像素值 = 原值
-	超出阈值零处理（beyondZero）
+#### 超出阈值零处理（beyondZero）
 		if  像素值 <= 阈值：像素值 = 原值
 		if  像素值 > 阈值：像素值 = 0
 

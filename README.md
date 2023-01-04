@@ -317,4 +317,49 @@
 ### 阈值处理的作用（function）
 
 ## ⑦图像的运算（imageOperation）
+### 掩模（masking）
+	创建一个三通道的掩模，利用numpy库的zero()方法
+
+### 图像的加法运算（addImage）
+	dst=cv2.(src1,src2,mask,dtype)
+		src1：第一幅图像
+		src2：第二幅图像
+		mask：可选参数，掩模，建议使用默认值
+		dtype：可选参数，图像深度，建议使用默认值
+		dst：相加之后的图像。如果相加之后值的结果大于255，则取255
+
+### 图像的位运算（bitOperation）
+	位与运算（bitAndOperation
+		dst=cv2.bitwise_and(src1,src2,mask)
+			src1：第一幅图像
+			src2：第二幅图像
+			mask：可选参数，掩模
+			dst：与运算之后的图像
+		与运算特点
+			①如果某像素与纯白像素做与运算，结果仍然是某像素的原值
+			②如果某像素与纯黑像素做与运算，结果为纯黑像素
+	位或运算（bitOrOperation）
+		dst=cv2.bitwise_or(src1,src2,mask)
+			src1：第一幅图像
+			src2：第二幅图像
+			mask：可选参数，掩模
+			dst：或运算之后的图像
+		或运算特点
+			①如果某像素与纯白像素做或运算，结果为纯白像素
+			②如果某像素与纯黑像素做或运算，结果仍然是某像素的原值
+	位取反运算（bitFetchAndRexerseOperation）
+		dst=cv2.bitwise_not(src,mask)
+			src：参与运算的图像
+			msak：可选参数，掩模
+			dst：取反运算之后的图像
+		取反运算特点
+			图像经过取反运算后呈现与原图颜色完全相反的效果
+	位异或运算（bitXorOperation）
+		dst=cv2.bitwise_xor(src,mask)
+			src：参与运算的图像
+			mask：可选参数，掩模
+			dst：异或运算之后的图像
+		异或运算特点
+			①如果某像素与纯白像素做异或运算，结果为原像素的取反结果
+			②如果某像素与纯黑像素做异或运算，结果仍然是某像素的原值
 

@@ -259,3 +259,62 @@
 				M：getPerspectiveTransform（）方法计算出的仿射矩阵
 
 ## ⑥图像的阈值处理
+### 阈值处理函数（threshold）
+	retval，dst=cv2.threshold(src,thresh,maxval,type)
+		src：被处理的图像，可以是多通道图像
+		thresh：阈值，阈值在125~150取值的效果最好
+		maxval：阈值处理采用的最大值
+		type：阈值处理类型。
+			cv2.THRESH_BINARY----->二值化阈值处理
+			cv2.THRESH_BINARY_INV----->反二值化阈值处理
+			cv2.THRESH_TOZERO----->低于阈值零处理
+			cv2.THRESH_TOZERO_INV----->超出阈值零处理
+			cv2.THRESH_TRUNC----->截断阈值处理
+		retval：处理时采用的阈值
+		dst：经过阈值处理后的图像
+
+### “非黑即白”的图像（blcakORwhite）
+	二值化处理（twoNumber）
+		if  像素值<=阈值：像素值=0
+		if  像素值>阈值：像素值=最大值
+	反二值化处理（notTwoNumber）
+		if  像素值 <= 阈值：像素值 = 最大值
+		if  像素值 > 阈值：像素值 = 0
+
+### 零处理（Zero）
+	低于阈值零处理（belowZero）
+		if  像素值 <= 阈值：像素值 = 0
+		if  像素值 > 阈值：像素值 = 原值
+	超出阈值零处理（beyondZero）
+		if  像素值 <= 阈值：像素值 = 原值
+		if  像素值 > 阈值：像素值 = 0
+
+### 截断处理（truncation）
+	if  像素值 < 阈值：像素值 = 原值
+	if  像素值 > 阈值：像素值 = 阈值
+
+### 自适应处理（adaptiveProcessing）
+	dst=cv2.adaptiveThreshold(src,maxValue,adaptiveMethod,thresholdType,blockSize,C)
+		src：被处理的图像。需要注意的是，该图像是灰度图像
+		maxValue：阈值处理采用的最大值
+		adaptiveMethod：自适应阈值的计算方法
+			cv2.ADAPTIVE_THRESH_MEAN_C：对一个正方形区域内的所有像素平均加权
+			cv2.ADAPTIVE_THRESH_GAUSSIAN_C：根据高斯函数按照像素与中心点的距离对一个正方形区域内的所有像素进行加权计算
+		thresholdType：阈值处理类型；需要注意的是，阈值处理类型需是cv2.THRESH_BINARY或cv2.THRESH_BINARY_INV中的一个
+		blockSize：一个正方形区域的大小。eg：5指的是5*5的区域
+		C：常量。阈值等于均值或者加权值减去这个常量
+		dst：经过阈值处理后的图像
+
+### Otsu方法（Otsu）
+	retval,dst=cv2.threshold(src,thresh,maxval,type)
+		src：被处理的图像。需注意该图像应为灰度图像
+		thresh：阈值，且要吧阈值设置为0
+		maxval：阈值处理采用的最大值，即255
+		type：阈值处理类型
+		retval：由Otus方法计算得到并使用的最合适的阈值
+		dst：经过阈值处理后的图像
+
+### 阈值处理的作用（function）
+
+## ⑦图像的运算（imageOperation）
+

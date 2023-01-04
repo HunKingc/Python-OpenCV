@@ -329,7 +329,7 @@
 		dst：相加之后的图像。如果相加之后值的结果大于255，则取255
 
 ### 图像的位运算（bitOperation）
-	位与运算（bitAndOperation
+#### 位与运算（bitAndOperation
 		dst=cv2.bitwise_and(src1,src2,mask)
 			src1：第一幅图像
 			src2：第二幅图像
@@ -338,7 +338,7 @@
 		与运算特点
 			①如果某像素与纯白像素做与运算，结果仍然是某像素的原值
 			②如果某像素与纯黑像素做与运算，结果为纯黑像素
-	位或运算（bitOrOperation）
+#### 位或运算（bitOrOperation）
 		dst=cv2.bitwise_or(src1,src2,mask)
 			src1：第一幅图像
 			src2：第二幅图像
@@ -347,14 +347,14 @@
 		或运算特点
 			①如果某像素与纯白像素做或运算，结果为纯白像素
 			②如果某像素与纯黑像素做或运算，结果仍然是某像素的原值
-	位取反运算（bitFetchAndRexerseOperation）
+#### 位取反运算（bitFetchAndRexerseOperation）
 		dst=cv2.bitwise_not(src,mask)
 			src：参与运算的图像
 			msak：可选参数，掩模
 			dst：取反运算之后的图像
 		取反运算特点
 			图像经过取反运算后呈现与原图颜色完全相反的效果
-	位异或运算（bitXorOperation）
+#### 位异或运算（bitXorOperation）
 		dst=cv2.bitwise_xor(src,mask)
 			src：参与运算的图像
 			mask：可选参数，掩模

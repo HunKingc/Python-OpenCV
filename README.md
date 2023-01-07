@@ -362,4 +362,38 @@
 		异或运算特点
 			①如果某像素与纯白像素做异或运算，结果为原像素的取反结果
 			②如果某像素与纯黑像素做异或运算，结果仍然是某像素的原值
+### 合并图像（mergedImage）
+#### 加权和（addWeighted）
+		dst=cv2.addWeighted(src1,alpha,src2,beta,gamma)
+			src1：第一幅图像
+			alpha：第一幅图像的权重
+			src：第二幅图像
+			beta：第二幅图像的权重
+			gamma：在和结果上添加的标量。该值越大，结果图像越亮，反之则越暗。可以是负数
+			dst：加权和后的图像
+#### 覆盖（cover）
+
+## ⑧模板匹配（templateMatching）
+### 模板匹配方法（matchTemplate）
+		result=cv2.matchTemplate(image,templ,method,mask)
+			image：原始图像
+			templ：模板图像，尺寸必须小于或等于原始图像
+			method：匹配方法
+				cv2.TM_SQDIFF（值：0）：差值平方和匹配，也叫平方差匹配。可以理解为差异程度。匹配程度越高，计算结果越小。完全匹配的结果为0
+				cv2.TM_SQDIFF_NORMED（值：1）：标准差值平方和匹配，也叫标准平方差匹配，规则同上
+				cv2.TM_CCORR（值：2）：相关匹配。可以理解为相似程度，匹配程度越高，计算结果越大
+				cv2.TM_CCORR_NORMED（值：3）：标准相关匹配，规则同上
+				cv2.TM_CCOEFF（值：4）：相关系数匹配，也属于相似程度，计算结果为-1~1的浮点数，1表示完全匹配，0表示毫无关系，-1表示2张图片亮度刚好相反
+				cv2.TM_CCOEFF_NORMED（值：5）：标准相关系数匹配，规则同上
+			mask：可选参数。掩模，只有cv2.TM_SQDIFF和cv2.TM_CCORR_NORMED支持此参数，建议采用默认值
+			result：计算得出的匹配结果。如果原始图像的宽、高分别为W、H，模板图像的宽、高分别为w、h，result就是一个W-w+1列、H-h+1行的32位浮点型数组。数组中每一个浮点数都是原始图像中对应像素位置的匹配结果，其含义需要根据method参数来解读
+### 单模板匹配（minMaxLoc）
+		minValue,maxValue,minLoc,maxLoc=cv2.minMaxLoc(src,mask)
+			src：matchTemplate()方法计算得出的数组
+			mask：可选参数，掩模，建议使用默认值
+			minValue：数组中的最小值
+			maxValue：数组中的最大值
+			minLoc：最小值的坐标，格式为（x，y）
+			maxLoc：最大值的坐标，格式为（x，y）
+
 

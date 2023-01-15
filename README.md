@@ -395,5 +395,83 @@
 			maxValue：数组中的最大值
 			minLoc：最小值的坐标，格式为（x，y）
 			maxLoc：最大值的坐标，格式为（x，y）
+### 多目标匹配（multiobjective）
+
+### 多模板匹配（multitemplate）
+
+## ⑨滤波器（Filter）
+### 均值滤波器（blur）
+		dst=cv2.blur(src,ksize,anchor,borderType)
+			src：被处理的图像
+			ksize：滤波核大小，其格式为（高度，宽度），建议使用如（3,3）、（5,5）、（7,7）等宽、高相等的奇数边长。滤波核越大，处理之后的图像就越模糊
+			anchor：可选参数，滤波核的锚点，建议采用默认值，可以自动计算锚点
+			borderType：可选参数，边界样式，建议采用默认值
+			dst：经过均值滤波处理之后的图像
+### 中值滤波器（medianBlur）
+		dst=cv2.medianBlur(src,ksize)
+			src：被处理的图像
+			ksize：滤波核的边长，必须是大于1的奇数，如3、5、7等。该方法根据此边长自动创建一个正方形的列表核
+			dst：经过中值滤波处理之后的图像
+### 高斯滤波（GaussianBlur）
+		dst=cv2.GaussianBlur(src,ksize,sigmaX,sigmaY,borderType)
+			src：被处理的图像
+			ksize：滤波核的大小，宽高必须是奇数，如（3,3）、（5,5）等
+			sigmaX：卷积核水平方向的标准差
+			sigmaY：卷积核垂直方向的标准差
+			borderType：可选参数，边界样式，建议使用默认值
+			dst：经过高斯滤波处理之后的图像
+			修改sigmaX或sigmaY的值都可以改变卷积核中的权重比例。如果不知道如何设计这两个参数值，就直接把这两个参数的值写成零，该方法就会根据滤波核的大小自动计算合适的权重比例
+### 双边滤波器（bilateralFilter）
+		dst=cv2.bilateralFilter(src,d,sigmaColor,sigmaSpace,borderType)
+			src：被处理的图像
+			d：以当前像素为中心的整个滤波区域的直径。如果d<0，则自动根据sigmaSpace参数计算得到，该值与保留的边缘信息数量成正比，与方法运行效率成反比
+			sigmaColor：参与计算的颜色范围，这个值是像素颜色值与周围颜色值的最大差值，只有颜色值之差小于这个值时，周围的像素才进行滤波计算。值为255时，表示所有颜色都参与计算
+			sigmaSpace：坐标空间的sigma值，该值越大，参与计算的像素数量就越多
+			borderType：可选参数，边界样式，建议默认
+			dst：经过双边滤波处理之后的图像
+
+## ⑩腐蚀与膨胀（corrosionAndExpansion）
+### 腐蚀（erode）
+		dst=cv2.erode(src,kernel,anchor,iterations,borderType,borderValue)
+			src：原始图像
+			kernel：腐蚀使用的核
+			anchor：可选参数，核的锚点位置
+			iterations：可选参数，腐蚀操作的迭代次数，默认值为1
+			borderType：可选参数，边界样式，建议默认
+			borderValue：可选参数，边界值，建议默认
+			dst：经过腐蚀之后的图像
+### 膨胀（dilate）
+		dst=cv2.dilate(src,kernel,anchor,iterations,borderType,borderValue)
+			src：原始图像
+			kernel：膨胀使用的核
+			anchor：可选参数，核的锚点位置
+			iterations：可选参数，腐蚀操作的迭代次数，默认值为1
+			borderType：可选参数，边界样式，建议默认
+			borderValue：可选参数，边界值，建议默认
+			dst：经过膨胀之后的图像
+### 开运算（openOperation）
+		先腐蚀再膨胀
+### 闭运算（closedOperation）
+		先膨胀再腐蚀
+### 形态学运算（morphologicalOperation）
+		梯度运算（gradientOperation）
+		dst=cv2.morphologyEx(src,op,kernel,anchor,iterations,borderType,borderValue)
+			src：原始图像
+			op：操作类型
+				cv2.MORPH_ERODE-----腐蚀操作
+				cv2.MORPH_DILATE-----膨胀操作
+				cv2.MORPH_OPEN-----开运算，先腐蚀后膨胀
+				cv2.MORPH_CLOSE-----闭运算，先膨胀后腐蚀
+				cv2.MORPH_GRADIENT-----梯度运算，膨胀图减腐蚀图
+				cv2.MORPH_TOPHAT-----顶帽运算，原始图减开运算图
+				cv2.MORPH_BLACKHAT-----黑帽运算，闭运算图减原始图
+			kernel：操作过程中使用的核
+			anchor：可选参数，核的锚点位置
+			iterations：可选参数，迭代次数，默认值为1
+			borderType：可选参数，边界样式，建议默认
+			borderValue：可选参数，边界值，建议默认
+			dst：操作之后得到的图像
+		顶帽运算（topHatOperation）
+		黑帽运算（blackHatOperation）
 
 

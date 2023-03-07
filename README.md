@@ -505,5 +505,23 @@
 			maxLevel：可选参数，绘制轮廓的层次深度，最深绘制第maxLevel层
 			offse：可选参数，偏移量，可以改变绘制结果的位置
 			image：同参数中的image，执行后原始图中就包含绘制的轮廓了，可以不使用此返回值保存结果
+### 轮廓拟合（contourFitting）
+		矩阵包围框（boundingRect）
+			retval=cv2.boundingRect(array)
+				array：轮廓数组
+				retval：元组类型，包含4个整数值，分别是最小矩形包围框的：左上角顶点的横坐标、左上角顶点的纵坐标、矩形的宽和高。所以也可以写成x，y，w，h=cv2.boundingRect(array)的形式
+		圆形包围框（minEnclosingCircle）
+			center,radius=cv2.minEnclosingCircle(points)
+				points：轮廓数组
+				center：元组类型，包含2个浮点值，是最小圆形包围框圆心的横坐标和纵坐标
+				radius：浮点类型，最小圆形包围框的半径
+
+### 凸包（convexHull）
+		hull=cv2.convexHull(points,colckwise,returnPoints)
+			points：轮廓数组
+			clockwise：可选参数，布尔类型。当该值为True时，凸包中的点按顺时针排列，为False时按逆时针排列
+			returePoints：可选参数，布尔类型。当该值为True时返回点坐标，为False时返回点索引。默认值为True
+			hull：凸包的点阵数组
+
 
 

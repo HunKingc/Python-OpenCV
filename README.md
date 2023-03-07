@@ -473,5 +473,37 @@
 			dst：操作之后得到的图像
 		顶帽运算（topHatOperation）
 		黑帽运算（blackHatOperation）
+## ⑪图形监测（graphicMonitoring）
+### 图像的轮廓（findContoursAndDrawContours）
+		contours,hierarchy=cv2.findContoours(image,mode,methode)
+			image：被检测的图像，必须是8位单通道二值图像。如果原始图像是彩色图像，必须转为灰度图像，并经过二值化处理
+
+			mode：轮廓的检索模式
+				cv2.RETR_EXTERNAL-----只检测外轮廓
+				cv2.RETR_LIST-----检测所有轮廓，但不建立层次关系
+				cv2.RETR_CCOMP-----检测所有轮廓，并建立两级层次关系
+				cv2.RETR_TREE-----检测所有轮廓，并建立树状结构的层次关系
+
+			methode：检测轮廓时使用的方法
+				cv2.CHAIN_APPROX_NONE-----储存轮廓上的所有点
+				cv2.CHAIN_APPROX_SIMPLE-----只保存水平、垂直或对角线轮廓的端点
+				cv2.CHAIN_APPROX_TC89_L1-----Ten-Chinl近似算法中的一种
+				cv2.CHAIN_APPROX_TC89_KCOS-----Ten-Chinl近似算法中的一种
+
+			contours：检测出的所有轮廓，list类型，每一个元素都是某个轮廓的像素坐标数组
+
+			hierarchy：轮廓之间的层次关系
+
+		image=cv2.drawContours(image,contours,contourIdx,color,thickness,linTypee,hierarchy,maxLevel,offse)
+			image：被绘制轮廓的原始图像，可以是多通道图像
+			contours：findContours()方法得出的轮廓列表
+			contoursIdx：绘制轮廓的索引，如果为-1则绘制所有轮廓
+			color：绘制颜色，使用BGR格式
+			thickness：可选参数，画笔的粗细程度，如果该值为-1则绘制实心轮廓
+			lineTypee：可选参数，绘制轮廓的线型
+			hierarchy：可选参数，findContours()方法得出的层次关系
+			maxLevel：可选参数，绘制轮廓的层次深度，最深绘制第maxLevel层
+			offse：可选参数，偏移量，可以改变绘制结果的位置
+			image：同参数中的image，执行后原始图中就包含绘制的轮廓了，可以不使用此返回值保存结果
 
 

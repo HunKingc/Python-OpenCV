@@ -1,4 +1,4 @@
-# Python-OpenCV
+# Python-OpenCV（每一章后面的英文缩写对应的是代码包   eg. IMG对应的是上面IMG的代码包）
 ## ①图像处理的基本操作（IMG）
 ### 读取图像
 		cv2.imread（filename,flags)

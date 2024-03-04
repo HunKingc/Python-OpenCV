@@ -522,6 +522,109 @@
 			clockwise：可选参数，布尔类型。当该值为True时，凸包中的点按顺时针排列，为False时按逆时针排列
 			returePoints：可选参数，布尔类型。当该值为True时返回点坐标，为False时返回点索引。默认值为True
 			hull：凸包的点阵数组
+### Canny边缘检测（Canny）
+		edges=cv2.Canny(image,threshold1,threshold2,apertureSize,L2gradient
+			image：检测的原始图像
+			threshold1：计算过程中使用的一个阈值，可以是最小阈值，也可以是最大阈值，通常用设置最小阈值
+			threshold2：计算过程中使用的第二个阈值，通常用来设置最大阈值
+			apertureSize：可选参数，Sobel算子的孔径大小
+			L2gradient：可选参数，计算图像梯度的标识，默认值为False。值为True时采用更精准的算法进行计算
+			edges：计算后得出的边缘图像，是一个二值灰度图像
+### 霍夫变换（houghTransformation）
+	直线检测（Line）
+		lines=cv2.HoughLinesP(image,rho,theta,threshold,minLineLength,maxLineGap)
+			image：检测的原始图像
+			rho：检测直线使用的半径步长，值为1时，表示检测所有可能的半径步长
+			theta：搜索直线的角度，值为π/180°，表示检测所有角度
+			threshold：阈值，该值越小，检测出的直线就越多
+			minLineLength：线段的最小长度，小于该长度的线段不记录到结果中
+			maxLineGap：线段之间的最小距离
+			lines：一个数组，元素为所有检测出的线段，每条线段是一个数组，代表线段两个端点的横、纵坐标，格式为[[[x1,y1,x2,y2],[x1,y1,x2,y2]]]
+	圆环检测（Circle）
+		circles=cv2.HoughCircles(image,method,dp,minDist,param1,param2,minRadius,maxRadius)
+			image：检测的原始图像
+			method：检测方法，OpenCV4.0.0及以前版本仅提供了cv2.HOUGH_GRADIENT作为唯一可用方法
+			dp：累加器分辨率与原始图像分辨率之比的倒数。值为1时，累加器与原始图像具有相同的分辨率；值为2时，累加器的分辨率为原始图像的1/2.通常使用1作为参数
+			minDist：圆心之间的最小距离
+			param1：可选参数，Canny边缘检测使用的最大阈值
+			param2：可选参数，检测圆环结果的投票数。第一轮筛选时投票数超过该值的圆环才会进入第二轮筛选。值越大，检测出的圆环越少，但越精准
+			minRadius：可选参数，圆环的最小半径
+			maxRadius：可选参数，圆环的最大半径
+			circles：一个数组，元素为所有检测出的圆环，每个圆环也是一个数组，内容为圆心的横、纵坐标和半径长度，格式为：[[[x1,y1,r1],[x2,y2,r2]]]
+## ⑫视频处理（Video）
+### 读取并显示摄像头视频（VideoCapture）
+	capture=cv2.VideoCapture(index)
+		capture：要打开的摄像头
+		index：摄像头的设备索引
+			为0：表示笔记本内置摄像头；为1：表示外接摄像头
+	检测摄像头是否初始化成功
+		retval=cv2.VideoCapture.isOpened()
+			retval：isOpened()方法的返回值。如果摄像头初始化成功，retval的值为True；否则，retval的值为False
+		初始化成功后，可以从摄像头读取帧
+			retval,image=cv2.VideoCapture.read()
+				retval：是否读取到帧。如果读取到帧，retval的值为True；否则，retval的值为False
+				image：读取到的帧。因为帧指的是构成视频的图像，所以把“读取到的帧”理解为“读取到的图像”
+	关闭摄像头
+		cv2.VideoCapture.release()
+### 播放视频文件（OpenVdieo）
+	读取并显示视频文件（ShowVideo）
+		video=cv2.VideoCapture(filename)
+			video：要打开的视频
+			filename：打开视频的文件名。例如，公司宣传.avi等
+	视频的暂停播放和继续播放（GoStopVideo）
+	获取视频文件的属性（GetVideo）
+		retval=cv2.VideoCapture(propld)
+			retval：获取与propId对应的属性值
+			propId：视频文件的属性值
+			VideoCapture类提供视频文件的属性值及其含义
+				cv2.CAP_PROP_POS_MSEC：视频文件播放时的当前位置
+				cv2.CAP_PROP_POS_FRAMES：帧的索引，从0开始
+				cv2.CAP_PROP_POS_AVI_RATIO：视频文件的相对位置（0表示开始播放，1表示结束播放）
+				cv2.CAP_PROP_FRAME_WIDTH：视频文件的帧宽度
+				cv2.CAP_PROP_FRAME_HEIGHT：视频文件的帧高度
+				cv2.CAP_PROP_FPS：帧速率
+				cv2.CAP_PROP_FOURCC：用4个字符表示的视频编码格式
+				cv2.CAP_PROP_FRAME_COUNT：视频文件的帧数‘
+				cv2.CAP_PROP_FORMAT：retrieve()方法返回的Mat对象的格式
+				cv2.CAP_PROP_MODE：指示当前捕获模式的后端专用的值
+				cv2.CAP_PROP_CONVERT_PGB：指示是否应将图像转换为RGB
+### 保存视频文件（VideoWriter)
+	<VideoWriter object>=cv2.VideoWriter(filename,fourcc,fps,framesize)
+		fourcc：用4个字符表示的视频编码格式
+			cv2.VideoWriter_fourcc('I','4','2','0')：未压缩的YUV颜色编码格式，兼容性好，但文件较大（.avi）
+			cv2.VideoWriter_fourcc('P','I','M','I')：MPEG-1编码格式（.avi）
+			cv2.VideoWriter_fourcc('X','V','I','D')：MPEG-4编码格式，视频文件的大小为平均值（.avi）
+			cv2.VideoWriter_fourcc('T','H','E','O')：Ogg Vorbis编码格式，兼容性差（.ogv）
+			cv2.VideoWriter_fourcc('F','L','V','I')：Flash视频编码格式（.flv）
+		fps：帧速率
+		framesize：每一帧的大小
+## ⑬人脸检测和人脸识别（Face）
+### 人脸检测（faceDetection）
+	<CascadeClassifier object>=cv2.CascadeClassifier(filename)
+		filename：级联分类器的XML文件名
+			haarcascade_eye.xml（眼睛检测）
+			haarcascade_eye_tree_eyeglasses.xml（眼镜检测）
+			haarcascade_frontalcatface.xml（正面猫脸检测）
+			haarcascade_frontalface_default.xml（正面人脸检测)
+			haarcascade_fullbody.xml（身形检测）
+			haarcascade_lefteye_2splits.xml（左眼检测）
+			haarcascade_lowerbody.xml（下半身检测）
+			haarcascade_profileface.xml（侧面人脸检测）
+			haarcascade_righteye_2splits.xml（右眼检测）
+			haarcascade_russian_plate_number.xml（车牌检测）
+			haarcascade_smile.xml（笑容检测）
+			haarcascade_upperbody.xml（上半身检测）
+		object：分类器对象
+	objects=cascade.detectMultiScale(image,scaleFactor,minNeighbors,flags,minSize,maxSize)
+		cascade：已有的分类器对象
+		image：待分析的图像
+		scaleFactor：可选参数，扫描图像时的缩放比例
+		minNeighbors：可选参数，每个候选区域至少保留多少个监测结果才可以判定为人脸。该值越大，分析的误差越小
+		flags：可选参数，建议使用默认值
+		minSize：可选参数，最小的目标尺寸
+		maxSize：可选参数，最大的目标尺寸
+		objects：捕捉到的目标区域数组，数组中每一个元素都是一个目标区域，每一个目标区域都包含4个值，分别是：左上角点横坐标、左上角点纵坐标、区域宽、区域高。object的格式为：[[244 203 111 111] [432 81 133 133]]
+
 
 
 
